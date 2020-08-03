@@ -8,17 +8,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container">        
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input class="form-control" type="text">
-                    <button class="generate-btn">Generate Pin</button>
+                    <input class="form-control" type="text" readonly style="text-align: center; 
+                    background: #10101B; font-size: 30px;" placeholder="Please Click Generate Pin">
+                    <button class="generate-btn" id="pin-generate-button">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" >
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
@@ -55,4 +56,6 @@
         </div>
     </div>
 </body>
+<script src="index.js"></script>
+
 </html>
