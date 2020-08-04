@@ -21,6 +21,8 @@ const notifySuccess = document.getElementById("notify-success");
 
 const notifyFailure = document.getElementById("notify-failure");
 
+const actionLeft = document.getElementById("action-left");
+
 let numberOfTryLeft = parseInt(tryNumber.textContent);
 console.log(numberOfTryLeft);
 // adding click event
@@ -28,6 +30,7 @@ console.log(numberOfTryLeft);
 pinGeneratorButton.addEventListener("click", () => {
   let randomPassword = Math.floor(1000 + Math.random() * (9999 - 1000 + 1));
   pinGeneratorInput.value = randomPassword;
+  actionLeft.style.display = "block";
 });
 
 clearButton.addEventListener("click", () => {
@@ -58,6 +61,7 @@ submitButton.addEventListener("click", () => {
       tryNumber.textContent = numberOfTryLeft;
       pinGeneratorInput.value = "";
       calculaorInput.value = "";
+      actionLeft.style.display = "none";
     } else {
       console.log("false");
       notifyFailure.style.display = "block";
@@ -69,7 +73,7 @@ submitButton.addEventListener("click", () => {
         tryNumber.textContent = numberOfTryLeft;
         if (numberOfTryLeft <= 0) {
           submitButton.disabled = true;
-          submitButton.style.backgroundColor = "red";
+          submitButton.style.backgroundColor = "#39458c";
           pinGeneratorInput.value = "";
         }
       }
