@@ -7,8 +7,22 @@ const pinGeneratorButton = document.getElementById("pin-generate-button");
 
 const calculaorInput = document.querySelector(".input-section input");
 
-const buttons = document.getElementsByClassName("button");
+const numbers = document.getElementsByClassName("number");
 
+const deleteButton = document.getElementById("delete");
+
+const clearButton = document.getElementById("clear");
+
+const submitButton = document.getElementById("submit");
+
+const tryNumber = document.getElementById("try-id");
+
+const notifySuccess = document.getElementById("notify-success");
+
+const notifyFailure = document.getElementById("notify-failure");
+
+let numberOfTryLeft = parseInt(tryNumber.textContent);
+console.log(numberOfTryLeft);
 // adding click event
 
 pinGeneratorButton.addEventListener("click", () => {
@@ -16,11 +30,72 @@ pinGeneratorButton.addEventListener("click", () => {
   pinGeneratorInput.value = randomPassword;
 });
 
+clearButton.addEventListener("click", () => {
+  calculaorInput.value = "";
+});
+
+deleteButton.addEventListener("click", () => {
+  if (calculaorInput.value.length > 0) {
+    let length = calculaorInput.value.length - 1;
+    let value = calculaorInput.value.slice(0, length);
+    calculaorInput.value = value;
+  }
+});
+
+submitButton.addEventListener("click", () => {
+  if (
+    calculaorInput.value != undefined &&
+    calculaorInput.value != "" &&
+    calculaorInput.value.length > 0 &&
+    pinGeneratorInput.value != undefined &&
+    pinGeneratorInput.value != "" &&
+    pinGeneratorInput.value.length > 0
+  ) {
+    if (areTwoStringEqual(calculaorInput.value, pinGeneratorInput.value)) {
+      notifyFailure.style.display = "none";
+      notifySuccess.style.display = "block";
+      numberOfTryLeft = 3;
+      tryNumber.textContent = numberOfTryLeft;
+      pinGeneratorInput.value = "";
+      calculaorInput.value = "";
+    } else {
+      console.log("false");
+      notifyFailure.style.display = "block";
+      notifySuccess.style.display = "none";
+
+      if (numberOfTryLeft > 0) {
+        calculaorInput.value = "";
+        numberOfTryLeft = numberOfTryLeft - 1;
+        tryNumber.textContent = numberOfTryLeft;
+        if (numberOfTryLeft <= 0) {
+          submitButton.disabled = true;
+          submitButton.style.backgroundColor = "red";
+          pinGeneratorInput.value = "";
+        }
+      }
+    }
+  }
+});
+
 // function for adding click event
 
-for (const button of buttons) {
-  button.addEventListener("click", (e) => {
+for (const number of numbers) {
+  number.addEventListener("click", (e) => {
     calculaorInput.value += e.target.innerText;
-    console.log(e.target.innerText);
   });
+}
+
+function areTwoStringEqual(string1, string2) {
+  if (
+    string1 != undefined &&
+    string1 != "" &&
+    string2 != undefined &&
+    string2 != ""
+  ) {
+    if (string1 === string2) {
+      return true;
+    }
+  }
+
+  return false;
 }
